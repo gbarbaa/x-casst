@@ -1,0 +1,96 @@
+<md-toolbar ng-show="!showSearch" layout="column" class="md-whiteframe-z2">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="nav.toggleLeft()" aria-label="Left Menu" ng-if="nav.leftMenu && nav.isLoggedIn()">
+      <ng-md-icon icon="menu"></ng-md-icon>
+    </md-button>
+    <h3><a ui-sref="/">CASST</a></h3>
+    <span flex></span>
+
+<!-- // Auth items -->
+    <md-button aria-label="Login / Signup" ng-click="nav.showLogin()" ng-if="!nav.isLoggedIn()" hide-xs>
+        <ng-md-icon icon="perm_identity" md-menu-align-target></ng-md-icon>
+        Login / Signup
+    </md-button>
+<!-- // Admin Pages -->
+    <md-button aria-label="{{item.text}}" ng-repeat="item in nav.menu.pages" ui-sref-active="active" ng-if="nav.isLoggedIn() && item.authenticate && nav.hasRole(item.role)" ui-sref="{{item.url}}" hide-xs>
+      <ng-md-icon icon="{{item.icon}}" md-menu-align-target></ng-md-icon>
+      <span hide-sm>{{item.text}}</span>
+    </md-button>
+
+<!-- // Public Pages -->
+    <md-button class ="md-raised" aria-label="{{item.text}}" ng-repeat="item in nav.menu.pages" ui-sref-active="active" ng-if="!item.authenticate" ui-sref="{{item.url}}" hide-xs>
+      <ng-md-icon icon="{{item.icon}}" md-menu-align-target></ng-md-icon>
+      <span hide-sm>{{item.text}}</span>
+    </md-button>
+
+<!-- Dropdown Menu Starts here -->
+   <md-menu>
+    <md-button aria-label="Open Settings" ng-click="nav.openMenu($mdOpenMenu, $event)"  ng-show="nav.smallScreen || nav.isLoggedIn()">
+      <md-icon class="avatar-icon md-whiteframe-z1" md-svg-icon="avatar:svg-{{ (0 + 1) % 11 }}"></md-icon>
+      {{nav.currentUser.name | labelCase}}
+      <ng-md-icon icon="more_vert"></ng-md-icon>
+    </md-button>
+    <md-menu-content width="4" class="navMenu">
+<!-- // Auth items -->
+      <md-menu-item ng-if="!nav.isLoggedIn()" ui-sref-active="active" hide-gt-xs>
+        <md-button aria-label="Login / Signup" ng-click="nav.showLogin()">
+          <ng-md-icon icon="perm_identity" md-menu-align-target></ng-md-icon>
+          Login / Signup
+        </md-button>
+      </md-menu-item>
+
+<!-- // Admin Pages -->
+      <md-subheader ng-if="nav.isLoggedIn() && nav.hasRole(item.role)" hide-gt-xs>Pages</md-subheader>
+      <md-menu-item ng-repeat="item in nav.menu.pages" ui-sref-active="active" ng-if="nav.isLoggedIn() && item.authenticate && nav.hasRole(item.role)" ui-sref="{{item.url}}" hide-gt-xs>
+        <md-button aria-label="{{item.text}}">
+          <ng-md-icon icon="{{item.icon}}" md-menu-align-target></ng-md-icon>
+          {{item.text}}
+        </md-button>
+      </md-menu-item>
+
+<!-- // Public Pages -->
+      <md-menu-item ng-repeat="item in nav.menu.pages" ui-sref-active="active" ng-if="!item.authenticate" ui-sref="{{item.url}}" hide-gt-xs>
+        <md-button aria-label="{{item.text}}">
+          <ng-md-icon icon="{{item.icon}}" md-menu-align-target></ng-md-icon>
+          {{item.text}}
+        </md-button>
+      </md-menu-item>
+
+<!-- // User Management -->
+      <md-subheader ng-if="nav.isLoggedIn()"> Settings</md-subheader>
+      <md-menu-item ng-if="nav.isLoggedIn()" ui-sref-active="active">
+        <md-button aria-label="Change Password" ng-click="nav.showCp()">
+          <ng-md-icon icon="settings_applications" md-menu-align-target></ng-md-icon>
+          Change Password
+        </md-button>
+      </md-menu-item>
+
+      <md-menu-item ui-sref-active="active" ng-if="nav.isLoggedIn()" ui-sref="logout">
+        <md-button aria-label="Logout">
+          <ng-md-icon icon="logout" md-menu-align-target></ng-md-icon>
+          Logout
+        </md-button>
+      </md-menu-item>
+
+    </md-menu-content>
+  </md-menu>
+</md-toolbar>
+<md-toolbar class="md-hue-1" ng-show="showSearch">
+  <div class="md-toolbar-tools">
+    <md-button ng-click="showSearch = !showSearch" aria-label="Back">
+      <ng-md-icon icon="arrow_back"></ng-md-icon>
+    </md-button>
+    <h3 flex="10">
+      Back
+    </h3>
+    <md-input-container flex>
+      <label>&nbsp;</label>
+      <input ng-model="search.who" placeholder="enter search">
+    </md-input-container>
+    <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+      <ng-md-icon icon="search"></ng-md-icon>
+    </md-button>
+
+  </div>
+
+</md-toolbar>

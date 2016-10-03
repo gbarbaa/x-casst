@@ -1,0 +1,21 @@
+<md-dialog aria-label="Create a new user" id="admin-user-create" layout="column"
+flex-xs="100"
+flex-sm = "75"
+flex-md="75"
+flex-lg="66"
+flex-gt-lg="50"
+md-whiteframe="24">
+<div ng-cloak>
+  <md-content layout="row" layout-align="end start">
+    <md-tabs md-dynamic-height md-border-bottom flex>
+      <md-tab label="Login">
+        <md-content ng-controller="LoginModalController as vm" ng-include="'components/login-modal/login.html'" class="md-padding" flex layout="column" class="content" layout-align="start center"></md-content>
+      </md-tab>
+      <md-tab label="Signup">
+        <md-content ng-controller="SignUpModalController as vm" ng-include="'components/login-modal/signup.html'" class="md-padding" flex layout="column" class="content" layout-align="start center"></md-content>
+      </md-tab>
+    </md-tabs>
+    <md-button aria-label="Cancel Login" ng-click="vm.close()" ng-controller="LoginModalController as vm" class="md-icon-button"><md-icon md-svg-icon="navigation:ic_close_24px"></md-icon></md-button>
+  </md-content>
+</div>
+</md-dialog>

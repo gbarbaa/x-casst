@@ -1,0 +1,36 @@
+<md-dialog aria-label="Image Details Dialog"  ng-cloak>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Media Details</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <md-icon md-svg-icon="navigation:ic_close_24px" aria-label="Close dialog"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content>
+    <div class="md-dialog-content">
+      <div layout="row" class="md-whiteframe-z2">
+        <div class="flexbox-container">
+        	<div>
+            <img ng-src="{{img.path}}" draggable="false" alt="{{img.name}}" class="detail-image"/>
+          </div>
+        	<div>
+            <ul>
+              <li><strong>Image Name:</strong> {{img.name}}</li>
+              <li><strong>Image Size:</strong> {{img.size}}</li>
+              <li><strong>Image type:</strong> {{img.type}}</li>
+              <li><strong>Image path:</strong> {{img.path}}</li>
+              <li><strong>Date Uploaded:</strong> {{img.name}}</li>
+            </ul>
+        	</div>
+        </div>
+      </div>
+  </md-dialog-content>
+  <md-dialog-actions layout="row">
+    <span flex></span>
+    <md-button ng-click="delete(img)" class="md-warn">
+     Delete Permanently
+    </md-button>
+  </md-dialog-actions>
+</md-dialog>

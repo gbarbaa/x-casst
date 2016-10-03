@@ -1,0 +1,31 @@
+<navbar></navbar>
+<md-content flex layout="column">
+<section layout="column" flex layout-align="start center" layout-padding layout-margin>
+	<h1>Forgot Password</h1>
+
+	<p class="md-warn message" ng-show="vm.errors.message">{{vm.errors.message}}</p>
+
+	<form name="form" ng-submit="vm.forgot(form)" novalidate>
+	<section class="section" layout="column">
+		<md-input-container md-is-error="(form.email.$error.required || form.email.$error.email || vm.errors.other) && form.email.$dirty">
+			<label>Email</label>
+			<input name="email" type="email" ng-model="vm.user.email" required md-autofocus/>
+			<div ng-messages="form.email.$error" ng-if="form.email.$dirty">
+				<div ng-message="required">Email ID is required</div>
+				<div ng-message="email">Please enter valid email address.</div>
+				<div ng-if="vm.errors.email">{{vm.errors.email}}</div>
+			</div>
+		</md-input-container>
+  </section>
+		<div class="md-dialog-actions" layout="row">
+	    <md-button type="submit" class="md-raised circular-progress-button md-primary" ng-disabled="vm.loading" aria-label="Forgot password" layout-align="center center">
+	      <span ng-show="!vm.loading"><ng-md-icon icon="email"></ng-md-icon> Reset Password</span>
+	      <md-progress-circular md-mode="indeterminate" md-diameter="60" ng-show="vm.loading" class="md-accent md-hue-1"></md-progress-circular><span ng-show="vm.loading">Loading...</span>
+	    </md-button>
+	  </div>
+
+	</form>
+
+</section>
+</md-content>
+<footer></footer>

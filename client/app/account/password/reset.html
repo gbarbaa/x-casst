@@ -1,0 +1,50 @@
+<navbar></navbar>
+<md-content flex layout="column">
+<section layout="column" flex layout-align="start center" layout-padding layout-margin>
+	<h1>Enter New Password</h1>
+
+	<p class="md-warn message" ng-show="vm.errors.message">{{vm.errors.message}}</p>
+
+	<form name="form" ng-submit="vm.reset(form)" novalidate>
+	<section class="section" layout="column">
+
+		<md-input-container md-is-error="(form.password.$error.required ||  form.password.$error.mongoose || form.password.$error.minlength) && form.password.$dirty">
+			<label>Password</label>
+			<input name="password" type="password" ng-model="vm.user.password" required mongoose-error ng-minlength="3"/>
+			<div ng-messages="form.password.$error" ng-if="form.password.$dirty">
+				<div ng-message="required">Password is required</div>
+				<div ng-message="mongoose">{{ errors.password }}</div>
+				<div ng-message="minlength">Password must be at least 3 characters.</div>
+			</div>
+		</md-input-container>
+
+		<md-input-container flex class="last" md-is-error="(form.passwordRepeat.$error.required ||  form.passwordRepeat.$error.minlength || form.passwordRepeat.$error.repeat-input) && form.passwordRepeat.$dirty">
+			<label>Repeat Password</label>
+			<input name="passwordRepeat" type="password"  ng-model="vm.user.passwordRepeat" required repeat-input="vm.user.password" ng-minlength="3">
+			<div ng-messages="form.passwordRepeat.$error" ng-if="form.passwordRepeat.$dirty">
+				<div ng-message="required">Please repeat the new password</div>
+				<div ng-message="minlength">Password must be at least 3 characters.</div>
+				<div ng-message="repeat-input">The passwords do not match</div>
+				<div ng-if="vm.errors.email">{{vm.errors.email}}</div>
+			</div>
+		</md-input-container>
+
+    <div class="form-group has-error">
+    <p class="help-block" ng-show="form.password.$error.required && form.password.$error.required && vm.submitted">
+       Please enter your password.
+    </p>
+
+    </div>
+</section>
+		<div class="md-dialog-actions" layout="row">
+	    <md-button type="submit" class="md-raised circular-progress-button md-primary" ng-disabled="!form.$valid || vm.loading" aria-label="Login">
+	      <span ng-show="!vm.loading"><ng-md-icon icon="lock"></ng-md-icon>Save New Password</span>
+	      <md-progress-circular md-mode="indeterminate" md-diameter="60" ng-show="vm.loading" class="md-accent md-hue-1"></md-progress-circular><span ng-show="vm.loading">Loading...</span>
+	    </md-button>
+	  </div>
+
+	</form>
+
+</section>
+</md-content>
+<footer></footer>
